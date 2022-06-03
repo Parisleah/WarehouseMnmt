@@ -46,12 +46,12 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedItemColor: Colors.greenAccent,
         backgroundColor: Colors.indigo.shade900,
         type: BottomNavigationBarType.fixed,
-        currentIndex: currentIndex,
+        currentIndex: currentIndex, 
         onTap: (index) => setState(() => currentIndex = index),
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.add_chart_rounded),
-            label: "ภาพรวม",
+            label: "ภาพรวม 1",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.back_hand),

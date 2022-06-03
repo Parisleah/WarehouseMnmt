@@ -9,7 +9,7 @@ class DashboardPage extends StatelessWidget {
         ),
         body: Center(
             child: Text(
-          "ภาพรวม",
+          "ภาพรวม +1  ",
           style: TextStyle(fontSize: 60),
         )),
       );

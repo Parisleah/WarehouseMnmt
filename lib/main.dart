@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "??",
       home: MyHomePage(),
     );
@@ -44,14 +45,14 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.white,
         selectedItemColor: Colors.greenAccent,
-        backgroundColor: Colors.indigo.shade900,
+        backgroundColor: Color.fromRGBO(30, 30, 65, 1.0),
         type: BottomNavigationBarType.fixed,
-        currentIndex: currentIndex, 
+        currentIndex: currentIndex,
         onTap: (index) => setState(() => currentIndex = index),
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.add_chart_rounded),
-            label: "ภาพรวม 1",
+            label: "ภาพรวม",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.back_hand),

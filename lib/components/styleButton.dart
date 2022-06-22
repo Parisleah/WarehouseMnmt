@@ -10,3 +10,9 @@ final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     borderRadius: BorderRadius.all(Radius.circular(10)),
   ),
 );
+
+// Product Picking Butoton
+final ButtonStyle prodPickButtonStyle = ElevatedButton.styleFrom(
+    primary: Color.fromRGBO(34, 34, 34, 1.0),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+    fixedSize: const Size(380, 50));

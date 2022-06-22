@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 // Import Style & Component
 import 'package:warehouse_mnmt/components/styleButton.dart';
-import 'package:warehouse_mnmt/components/MoneyBox_component.dart';
+import 'package:warehouse_mnmt/components/moneyBox_component.dart';
 import 'package:warehouse_mnmt/main.dart';
 
 class DashboardPage extends StatelessWidget {

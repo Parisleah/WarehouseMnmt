@@ -16,3 +16,19 @@ final ButtonStyle prodPickButtonStyle = ElevatedButton.styleFrom(
     primary: Color.fromRGBO(34, 34, 34, 1.0),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
     fixedSize: const Size(380, 50));
+
+// Cancel & Save Button ----------------------------------------------------
+final ButtonStyle cancelButtonStyle = TextButton.styleFrom(
+    primary: Colors.white,
+    backgroundColor: Color.fromARGB(255, 255, 60, 60),
+    onSurface: Colors.grey,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+    fixedSize: const Size(100, 50));
+
+final ButtonStyle saveButtonStyle = TextButton.styleFrom(
+    primary: Colors.white,
+    backgroundColor: Color.fromARGB(255, 90, 255, 156),
+    onSurface: Colors.grey,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+    fixedSize: const Size(100, 50));
+// ------------------------------------------------------------------------

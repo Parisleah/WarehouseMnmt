@@ -26,11 +26,32 @@ class User {
 class SellingPage extends StatelessWidget {
   List<User> users = [
     const User(
-        username: "Pisit Janthawee",
-        email: "Pisit.jant@bumail.net",
+        username: "Thejassvee",
+        email: "Thejacvee.jagg@bumail.net",
         urlAvatar:
             "https://yt3.ggpht.com/vWyy-S6mrH0522dupmgkOq-HRHEwjm-q_qt6UUlvhp11_iTTQoITKuC4jGN05e_kwl2OTOmA=s900-c-k-c0x00ffffff-no-rj",
         cost: 699.12165,
+        sellingDate: "14 เม.ย. 2022"),
+    const User(
+        username: "Pisit Janthawee",
+        email: "Pisit.jant@bumail.net",
+        urlAvatar:
+            "https://scontent.fbkk4-2.fna.fbcdn.net/v/t1.6435-9/88154019_2612602255641052_5203521606894223360_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeE9dxwmZnj8JUAqhjDVruBknB-2SijWS-acH7ZKKNZL5i57DIONDmiNODrQmDiTWVpYf4WB5-CLltd_mEYgW6dK&_nc_ohc=opqwwDRXHu8AX-Mj1Sd&_nc_ht=scontent.fbkk4-2.fna&oh=00_AT-zPjcQkfDS5L7twXD-nFsC7yLYaMJr7GgSCQsvpQBAZQ&oe=62DC6820",
+        cost: 890.12165,
+        sellingDate: "14 เม.ย. 2022"),
+    const User(
+        username: "Nattapat Kongpanya",
+        email: "Nattapat.Kong@bumail.net",
+        urlAvatar:
+            "https://instagram.fbkk3-1.fna.fbcdn.net/v/t51.2885-15/274911629_146513871151813_3524025211260475370_n.jpg?stp=dst-jpg_e35&_nc_ht=instagram.fbkk3-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=PUC6ft8oRLAAX89Hr_L&tn=Q4_hpCT4vYxXKS2x&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=Mjc4Mjg4OTU0NDcwMjYwMzM3MQ%3D%3D.2-ccb7-5&oh=00_AT-VhDExLFAdmPYBit6hbVu4plX5Jlz7zWXMdBJnTCrCSw&oe=62BD2ACA&_nc_sid=30a2ef",
+        cost: 1890.12165,
+        sellingDate: "14 เม.ย. 2022"),
+    const User(
+        username: "Phongsiri Chaisrida",
+        email: "Dong.chai@bumail.net",
+        urlAvatar:
+            "https://scontent.fbkk4-2.fna.fbcdn.net/v/t39.30808-6/273028212_1969379269911513_6834572220376279937_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeHxl1N8E14wAiy5XO6UYoEczWlc8PPPKz7NaVzw888rPjU3AGnu87os-iFMfEyPQzfGtoNLya0WWBf6GOeA1vFw&_nc_ohc=6ywswFDO1_0AX80Maod&_nc_zt=23&_nc_ht=scontent.fbkk4-2.fna&oh=00_AT9rbI29_KmTVxvqsAPJl-kAtfnib5a-qlRKVzHLf2uiKg&oe=62BB4700",
+        cost: 990.12165,
         sellingDate: "14 เม.ย. 2022"),
   ];
 
@@ -166,9 +187,22 @@ class SellingPage extends StatelessWidget {
                   color: Color.fromRGBO(56, 54, 76, 1.0),
                   child: ListTile(
                     leading: CircleAvatar(
-                      radius: 20,
-                      backgroundImage: NetworkImage(user.urlAvatar),
+                      radius: 30,
+                      // backgroundImage: NetworkImage(user.urlAvatar),
+                      backgroundImage: AssetImage('assets/images/ga.png'),
                     ),
+
+                    // leading: Container(
+                    //   width: 70.0,
+                    //   height: 70.0,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(10),
+                    //     image: const DecorationImage(
+                    //       fit: BoxFit.cover,
+                    //       image: AssetImage('assets/images/ga.png'),
+                    //     ),
+                    //   ),
+                    // ),
                     title: Text(
                       user.username,
                       style: TextStyle(

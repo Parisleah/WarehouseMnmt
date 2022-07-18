@@ -2,16 +2,15 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 
-class selling_nav_chooseShipping extends StatefulWidget {
-  const selling_nav_chooseShipping({Key? key}) : super(key: key);
+class buying_nav_chooseDealer extends StatefulWidget {
+  const buying_nav_chooseDealer({Key? key}) : super(key: key);
 
   @override
-  State<selling_nav_chooseShipping> createState() =>
-      _selling_nav_chooseShippingState();
+  State<buying_nav_chooseDealer> createState() =>
+      _buying_nav_chooseDealerState();
 }
 
-class _selling_nav_chooseShippingState
-    extends State<selling_nav_chooseShipping> {
+class _buying_nav_chooseDealerState extends State<buying_nav_chooseDealer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,13 +21,18 @@ class _selling_nav_chooseShippingState
         title: Column(
           children: [
             Text(
-              "เลือกการจัดส่ง",
+              "เลือกตัวแทนจำหน่าย",
               style: TextStyle(fontSize: 25),
             )
           ],
         ),
         centerTitle: true,
-        actions: [],
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.add),
+          )
+        ],
         backgroundColor: Color.fromRGBO(30, 30, 65, 1.0),
       ),
       body: Container(
@@ -56,10 +60,17 @@ class _selling_nav_chooseShippingState
             child: Row(children: [
               Padding(
                 padding: const EdgeInsets.all(25.0),
-                child: const Text("Flash Express",
+                child: const Text("Awesome Shop",
                     style: TextStyle(fontSize: 15, color: Colors.white)),
               ),
               Spacer(),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.delete,
+                  color: Colors.white,
+                ),
+              )
             ]),
           ),
           // Choose Customer Button

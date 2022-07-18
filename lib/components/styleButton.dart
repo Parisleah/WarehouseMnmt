@@ -11,11 +11,11 @@ final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
   ),
 );
 
-// Product Picking Butoton
+// Product Picking Button
 final ButtonStyle prodPickButtonStyle = ElevatedButton.styleFrom(
     primary: Color.fromRGBO(34, 34, 34, 1.0),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-    fixedSize: const Size(380, 50));
+    fixedSize: const Size(350, 50));
 
 // Cancel & Save Button ----------------------------------------------------
 final ButtonStyle cancelButtonStyle = TextButton.styleFrom(

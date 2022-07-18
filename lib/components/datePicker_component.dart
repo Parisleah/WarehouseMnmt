@@ -20,7 +20,7 @@ class _datePickerState extends State<datePicker> {
         children: [
           Icon(Icons.calendar_month),
           Padding(
-            padding: const EdgeInsets.only(left: 250),
+            padding: const EdgeInsets.only(left: 240),
             child: Text('${date.day}/${date.month}/${date.year}'),
           )
         ],

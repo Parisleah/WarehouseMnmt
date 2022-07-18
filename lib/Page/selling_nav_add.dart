@@ -20,25 +20,25 @@ import 'package:warehouse_mnmt/Models/products.dart';
 // Class for TextField Decimal Format (ex. 1,000,200.00 $)
 import 'package:warehouse_mnmt/components/textField_component.dart';
 
-class sellingNavEdit extends StatefulWidget {
+class sellingNavAdd extends StatefulWidget {
   // Navigation ---------------------------------------------------
 
   // Navigation ---------------------------------------------------
 
   // User ---------------------------------------------------------
-  final User user;
+  // final User user;
 
-  sellingNavEdit({
-    Key? key,
-    required this.user,
-  }) : super(key: key);
+  // sellingNavAdd({
+  //   Key? key,
+  //   required this.user,
+  // }) : super(key: key);
   // User ---------------------------------------------------------
 
   @override
-  State<sellingNavEdit> createState() => _sellingNavEditState();
+  State<sellingNavAdd> createState() => _sellingNavAddState();
 }
 
-class _sellingNavEditState extends State<sellingNavEdit> {
+class _sellingNavAddState extends State<sellingNavAdd> {
   List<Prod> products = [
     const Prod(
         prodName: "Scream Black Coat1",
@@ -47,22 +47,15 @@ class _sellingNavEditState extends State<sellingNavEdit> {
         prodImage: "assets/images/products/1.png",
         prodPrice: 590.50,
         prodAmount: 2),
-    const Prod(
-        prodName: "Scream Black Coat2",
-        prodCategory: "Jacket",
-        prodDetail: "Leather 100%",
-        prodImage: "assets/images/products/2.png",
-        prodPrice: 590.50,
-        prodAmount: 2),
   ];
   // TextField shippingPrice
   final CurrencyTextInputFormatter formatter = CurrencyTextInputFormatter();
 
   // Edit Detail Zone
-  final shippingPrice = 50.99;
-  final totalPrice = 1180.99;
-  final withoutTaxPrice = 1098.3207;
-  final tax = 82.6693;
+  final shippingPrice = 0;
+  final totalPrice = 0;
+  final withoutTaxPrice = 0;
+  final tax = 0;
 
   // TextField -------------------------------------------------------------
   // ShipPrice TextField
@@ -90,46 +83,19 @@ class _sellingNavEditState extends State<sellingNavEdit> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(120),
+        preferredSize: Size.fromHeight(70),
         child: AppBar(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
           title: Column(
             children: [
               Text(
-                "แก้ไขรายการขาย",
+                "เพิ่มรายการขาย",
                 style: TextStyle(fontSize: 25),
               )
             ],
           ),
           centerTitle: true,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.delete),
-            )
-          ],
-          flexibleSpace: Center(
-              child: Baseline(
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              CircleAvatar(
-                radius: 20,
-                backgroundImage: AssetImage(widget.user.urlAvatar),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Text(
-                  widget.user.username,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-              )
-            ]),
-            baselineType: TextBaseline.alphabetic,
-            baseline: 90,
-          )),
           backgroundColor: Color.fromRGBO(30, 30, 65, 1.0),
         ),
       ),
@@ -155,7 +121,7 @@ class _sellingNavEditState extends State<sellingNavEdit> {
             padding: const EdgeInsets.all(10.0),
             child: Column(children: [
               const SizedBox(
-                height: 150,
+                height: 90,
               ),
               // Date Picker
               Container(
@@ -321,7 +287,7 @@ class _sellingNavEditState extends State<sellingNavEdit> {
                         style: TextStyle(fontSize: 15, color: Colors.white)),
                   ),
                   Spacer(),
-                  const Text("Flash Express",
+                  const Text("เลือกการจัดส่ง",
                       style: TextStyle(fontSize: 15, color: Colors.grey)),
                   IconButton(
                     icon: const Icon(Icons.arrow_forward_ios,

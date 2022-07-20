@@ -58,7 +58,7 @@ class _OtpScreenState extends State<OtpScreen> {
     return SafeArea(
       child: Column(
         children: <Widget>[
-          buildExitButton(),
+          // buildExitButton(),
           Expanded(
             child: Container(
               alignment: Alignment(0,0.5),
@@ -180,10 +180,11 @@ class _OtpScreenState extends State<OtpScreen> {
                       onPressed: (){
                         clearPin();
                       },
-                      // child: Image.asset(
-                      //   "image/delete.png",
-                      //   color: Colors.white,
-                      // ),
+                      child: Icon(
+                        Icons.backspace,
+                        size: 25,
+                        color: Colors.white,
+                        ),
                     ),
                   ),
                 ],
@@ -299,25 +300,25 @@ class _OtpScreenState extends State<OtpScreen> {
     );
   }
 
-  buildExitButton() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: MaterialButton(
-            onPressed: (){},
-            height: 50.0,
-            minWidth: 50.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50.0),
-            ),
-            child: Icon(Icons.clear, color: Colors.white),
-          ),
-        ),
-      ],
-    );
-  }
+  // buildExitButton() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.end,
+  //     children: <Widget>[
+  //       Padding(
+  //         padding: const EdgeInsets.all(8.0),
+  //         child: MaterialButton(
+  //           onPressed: (){},
+  //           height: 50.0,
+  //           minWidth: 50.0,
+  //           shape: RoundedRectangleBorder(
+  //             borderRadius: BorderRadius.circular(50.0),
+  //           ),
+  //           child: Icon(Icons.clear, color: Colors.white),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 }
 
 class PINNumber extends StatelessWidget {

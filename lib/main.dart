@@ -7,6 +7,8 @@ import 'Page/buying_page.dart';
 import 'Page/selling_page.dart';
 import 'Page/profile_page.dart';
 import 'Page/product_page.dart';
+import 'new_user_screen/page_1_start_building.dart';
+
 
 void main() {
   var app = MyApp();
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "??",
-      home: MyHomePage(),
+      home: BuildingScreen(),
     );
   }
 }

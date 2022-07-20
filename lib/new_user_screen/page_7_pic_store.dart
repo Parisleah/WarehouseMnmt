@@ -1,10 +1,59 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../normal_user_screen/all_store_page.dart';
 
-class PicStoreScreen extends StatelessWidget {
-  const PicStoreScreen({Key? key}) : super(key: key);
+class PicStoreScreen extends StatefulWidget {
+  PicStoreScreen({Key? key}) : super(key: key);
+
+  @override
+  State<PicStoreScreen> createState() => _PicStoreScreenState();
+}
+
+class _PicStoreScreenState extends State<PicStoreScreen> { 
+
+  showAlert() async{
+    Alert(
+      context: context,
+      type: AlertType.success,
+      title: "สร้างร้านค้าสำเร็จ",
+      buttons: [
+        DialogButton(
+          // ignore: sort_child_properties_last
+          child: Text(
+            "ดูร้านค้า",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () => Navigator.push(context, 
+                        MaterialPageRoute(
+                          builder: (context)=> const AllStorePage()),
+                      ),
+          color: Color.fromRGBO(50, 224, 119, 1.0),
+          width: 120,
+        )
+      ],
+    ).show();
+  }
+
+  File? _image;
+
+  Future getImage() async{
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if(image == null) return;
+    final imageTemporary = File(image.path);
+
+    setState(() {
+      _image = imageTemporary;
+      }
+    );
+}
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +83,20 @@ class PicStoreScreen extends StatelessWidget {
                     fontSize: 22
                     )
                   ),
-
-                  // รูป
-                  const SizedBox(height: 70),
-                  const Text('รูป'),
-
                   // เพิ่มรูปร้านค้า
-                  const SizedBox(height: 90),
-                  const Text('เพิ่มรูปร้านค้า'),
+                  
+                  Padding(
+                    padding: const EdgeInsets.only(left: 40, top:10, right: 40, bottom: 0),
+                    child: _image != null ? Image.file(_image!, width: 250, height: 250, fit: BoxFit.cover,) : const Icon(Icons.image, size: 200, color: Color.fromARGB(255, 143, 143, 143),),
+                  ),
+                  
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 18),
+                    ),
+                    onPressed: getImage,
+                    child: const Text('เพิ่มรูปร้านค้า'),
+                  ),
 
                   // เบอร์โทรร้านค้า Text
                   const SizedBox(height: 20),
@@ -95,17 +150,16 @@ class PicStoreScreen extends StatelessWidget {
                         )
                       )
                     ),
-                    child: const Text('ยืนยัน',
+                    // ignore: prefer_const_constructors
+                    child: Text('ยืนยัน',
+                      // ignore: prefer_const_constructors
                       style: TextStyle(fontSize: 20)
                       ), 
-                      onPressed: () { 
-                        Navigator.push(context, 
-                        MaterialPageRoute(
-                          builder: (context)=> const AllStorePage()),
-                      );
-                    },
-                  )
-                ]
+                      onPressed: () {
+                        showAlert();
+                      },
+                  ),
+                ],
               ),
             ),
           ),

@@ -170,7 +170,7 @@ class _sellingNavPickProdState extends State<sellingNavPickProd> {
                         scrollbarRadius: const Radius.circular(40),
                         scrollbarThickness: 6,
                         scrollbarAlwaysShow: true,
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.keyboard_arrow_down,
                           color: Colors.white,
                         ),
@@ -189,7 +189,7 @@ class _sellingNavPickProdState extends State<sellingNavPickProd> {
                     height: 60,
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton2<String>(
-                        hint: Text(
+                        hint: const Text(
                           "เลือกล็อตสินค้า",
                           style: TextStyle(fontSize: 15, color: Colors.white),
                         ),

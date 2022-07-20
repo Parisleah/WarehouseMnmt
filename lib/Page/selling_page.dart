@@ -10,61 +10,48 @@ import 'package:warehouse_mnmt/Page/selling_nav_add.dart';
 // Component
 import 'package:warehouse_mnmt/components/searchBar_component.dart';
 
-class User {
-  final String username;
-  final String email;
-  final String urlAvatar;
-  final double cost;
-  final String sellingDate;
-
-  const User({
-    required this.username,
-    required this.email,
-    required this.urlAvatar,
-    required this.cost,
-    required this.sellingDate,
-  });
-}
+// Models
+import 'package:warehouse_mnmt/Models/customers.dart';
 
 class SellingPage extends StatelessWidget {
-  List<User> users = [
-    const User(
+  List<Customer> customers = [
+    const Customer(
         username: "Thejasvee",
         email: "Thejasvee.jagg@bumail.net",
         urlAvatar: "assets/images/profiles/Tj.png",
         cost: 699.12165,
         sellingDate: "14 เม.ย. 2022"),
-    const User(
+    const Customer(
         username: "Pisit Janthawee",
         email: "Pisit.jant@bumail.net",
         urlAvatar: "assets/images/profiles/Aum.png",
         cost: 890.12165,
         sellingDate: "14 เม.ย. 2022"),
-    const User(
+    const Customer(
         username: "Nattapat Kongpanya",
         email: "Nattapat.Kong@bumail.net",
         urlAvatar: "assets/images/profiles/Mark.png",
         cost: 1890.12165,
         sellingDate: "14 เม.ย. 2022"),
-    const User(
+    const Customer(
         username: "Phongsiri Chaisrida",
         email: "Dong.chai@bumail.net",
         urlAvatar: "assets/images/profiles/Dong.png",
         cost: 990.12165,
         sellingDate: "14 เม.ย. 2022"),
-    const User(
+    const Customer(
         username: "Phongsiri Chaisrida",
         email: "Dong.chai@bumail.net",
         urlAvatar: "assets/images/profiles/Dong.png",
         cost: 990.12165,
         sellingDate: "14 เม.ย. 2022"),
-    const User(
+    const Customer(
         username: "Phongsiri Chaisrida",
         email: "Dong.chai@bumail.net",
         urlAvatar: "assets/images/profiles/Dong.png",
         cost: 990.12165,
         sellingDate: "14 เม.ย. 2022"),
-    const User(
+    const Customer(
         username: "Phongsiri Chaisrida",
         email: "Dong.chai@bumail.net",
         urlAvatar: "assets/images/profiles/Dong.png",
@@ -202,9 +189,9 @@ class SellingPage extends StatelessWidget {
           alignment: Alignment.center,
           padding: const EdgeInsets.all(10),
           child: ListView.builder(
-              itemCount: users.length,
+              itemCount: customers.length,
               itemBuilder: (context, index) {
-                final user = users[index];
+                final customer = customers[index];
                 return Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
@@ -217,7 +204,7 @@ class SellingPage extends StatelessWidget {
 
                       // backgroundImage: NetworkImage(user.urlAvatar),
 
-                      backgroundImage: AssetImage(user.urlAvatar),
+                      backgroundImage: AssetImage(customer.urlAvatar),
                     ),
 
                     // leading: Container(
@@ -233,7 +220,7 @@ class SellingPage extends StatelessWidget {
                     // ),
 
                     title: Text(
-                      user.username,
+                      customer.username,
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white),
                     ),
@@ -241,24 +228,25 @@ class SellingPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 80),
                         child: Text(
-                          user.email,
+                          customer.email,
                           style: TextStyle(fontSize: 15, color: Colors.white),
                         ),
                       ),
                       Text(
-                        user.sellingDate,
+                        customer.sellingDate,
                         style: TextStyle(color: Colors.grey),
                       )
                     ]),
                     trailing: Text(
-                      '${NumberFormat("#,###.##").format(user.cost)} ฿',
+                      '${NumberFormat("#,###.##").format(customer.cost)} ฿',
                       style: TextStyle(
                           color: Colors.greenAccent,
                           fontWeight: FontWeight.bold),
                     ),
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => sellingNavEdit(user: user)));
+                          builder: (context) =>
+                              sellingNavEdit(customer: customer)));
                     },
                   ),
                 );

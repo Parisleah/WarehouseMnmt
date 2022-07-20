@@ -2,6 +2,9 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 
+// Page
+import 'package:warehouse_mnmt/Page/buying/buying_nav_createDealer.dart';
+
 class buying_nav_chooseDealer extends StatefulWidget {
   const buying_nav_chooseDealer({Key? key}) : super(key: key);
 
@@ -29,7 +32,12 @@ class _buying_nav_chooseDealerState extends State<buying_nav_chooseDealer> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                      builder: (context) => buying_nav_createDealer()));
+            },
             icon: Icon(Icons.add),
           )
         ],

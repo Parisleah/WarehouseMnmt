@@ -9,6 +9,7 @@ import 'package:warehouse_mnmt/Page/selling_nav_chooseCustomer.dart';
 import 'package:warehouse_mnmt/Page/selling_page.dart';
 import 'package:warehouse_mnmt/Page/selling_nav_pickProd.dart';
 import 'package:warehouse_mnmt/Page/selling_nav_chooseShipping.dart';
+import 'package:warehouse_mnmt/Page/pickProduct/pickProduct_page.dart';
 
 // Component
 import 'package:warehouse_mnmt/components/datePicker_component.dart';
@@ -16,6 +17,7 @@ import 'package:warehouse_mnmt/components/styleButton.dart';
 
 // Model
 import 'package:warehouse_mnmt/Models/products.dart';
+import 'package:warehouse_mnmt/Models/customers.dart';
 
 // Class for TextField Decimal Format (ex. 1,000,200.00 $)
 import 'package:warehouse_mnmt/components/textField_component.dart';
@@ -25,14 +27,14 @@ class sellingNavEdit extends StatefulWidget {
 
   // Navigation ---------------------------------------------------
 
-  // User ---------------------------------------------------------
-  final User user;
+  // customer ---------------------------------------------------------
+  final Customer customer;
 
   sellingNavEdit({
     Key? key,
-    required this.user,
+    required this.customer,
   }) : super(key: key);
-  // User ---------------------------------------------------------
+  // customer ---------------------------------------------------------
 
   @override
   State<sellingNavEdit> createState() => _sellingNavEditState();
@@ -114,12 +116,12 @@ class _sellingNavEditState extends State<sellingNavEdit> {
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               CircleAvatar(
                 radius: 20,
-                backgroundImage: AssetImage(widget.user.urlAvatar),
+                backgroundImage: AssetImage(widget.customer.urlAvatar),
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  widget.user.username,
+                  widget.customer.username,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -191,7 +193,12 @@ class _sellingNavEditState extends State<sellingNavEdit> {
                   child: Column(children: [
                     ElevatedButton(
                       style: prodPickButtonStyle,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) => pickProd_page()));
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

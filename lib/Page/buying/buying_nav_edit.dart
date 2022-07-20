@@ -8,9 +8,13 @@ import 'package:warehouse_mnmt/Page/selling_nav_chooseCustomer.dart';
 import 'package:warehouse_mnmt/Page/selling_nav_chooseShipping.dart';
 
 // Page
+// Page / Selling
 import 'package:warehouse_mnmt/Page/selling_page.dart';
 import 'package:warehouse_mnmt/Page/selling_nav_pickProd.dart';
+// Page / Buying
 import 'package:warehouse_mnmt/Page/buying/buying_nav_chooseDealer.dart';
+// Page / pickProduct
+import 'package:warehouse_mnmt/Page/pickProduct/pickProduct_page.dart';
 
 // Component
 import 'package:warehouse_mnmt/components/datePicker_component.dart';
@@ -220,7 +224,12 @@ class _buyingNavEditState extends State<buyingNavEdit> {
                   child: Column(children: [
                     ElevatedButton(
                       style: prodPickButtonStyle,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) => pickProd_page()));
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

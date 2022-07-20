@@ -67,6 +67,7 @@ class SellingPage extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(160),
           child: AppBar(
+             automaticallyImplyLeading: false,
             shadowColor: Colors.black.withOpacity(1.0),
             shape: RoundedRectangleBorder(
                 borderRadius:

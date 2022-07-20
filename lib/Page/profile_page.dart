@@ -9,6 +9,7 @@ class ProfilePage extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(160),
           child: AppBar(
+            automaticallyImplyLeading: false,
             title: const Text(
               " ร้านของฉัน",
               style: TextStyle(fontSize: 25),

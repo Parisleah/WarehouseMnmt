@@ -42,6 +42,7 @@ class BuyingPage extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(160),
           child: AppBar(
+            automaticallyImplyLeading: false,
             title: const Text(
               " สั่งซื้อสินค้า",
               style: TextStyle(fontSize: 25),

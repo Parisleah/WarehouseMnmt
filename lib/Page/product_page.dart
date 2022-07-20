@@ -12,6 +12,7 @@ class ProductPage extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(160),
           child: AppBar(
+            automaticallyImplyLeading: false,
             title: const Text(
               " สินค้า",
               style: TextStyle(fontSize: 25),

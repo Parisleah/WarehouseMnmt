@@ -68,6 +68,7 @@ class DashboardPage extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(160),
           child: AppBar(
+            automaticallyImplyLeading: false,
             shape: RoundedRectangleBorder(
                 borderRadius:
                     BorderRadius.vertical(bottom: Radius.circular(30))),
@@ -220,6 +221,7 @@ class DashboardPage extends StatelessWidget {
                 height: 140,
                 width: 450,
                 decoration: BoxDecoration(
+                  color: Colors.transparent,
                   borderRadius: BorderRadius.circular(22),
                 ),
                 child: ListView.builder(
@@ -258,7 +260,7 @@ class DashboardPage extends StatelessWidget {
                                 Text(
                                   customer.username,
                                   style: TextStyle(
-                                      fontSize: 15, color: Colors.white),
+                                      fontSize: 12, color: Colors.white),
                                 ),
                                 Text(
                                   '${NumberFormat("#,###.##").format(customer.cost)} ฿',

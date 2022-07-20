@@ -80,12 +80,15 @@ class CreateStoreName extends StatelessWidget {
                     )
                   ),
                   child: const Text('ยืนยัน',
-                    style: TextStyle(fontSize: 20)
+                    style: TextStyle(
+                    color: Color.fromRGBO(31, 26, 48, 1),
+                    fontSize: 20
                     ), 
+                  ),
                     onPressed: () { 
                       Navigator.push(context, 
                       MaterialPageRoute(
-                        builder: (context)=> const PicStoreScreen()),
+                        builder: (context)=> PicStoreScreen()),
                     );
                   },
                 )

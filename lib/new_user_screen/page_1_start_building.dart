@@ -63,7 +63,10 @@ class _BuildingScreenState extends State<BuildingScreen> {
                   )
                 ),
                 child: Text('สร้างเลย',
-                  style: TextStyle(fontSize: 20)
+                  style: TextStyle(
+                    color: Color.fromRGBO(31, 26, 48, 1),
+                    fontSize: 20
+                  ),
                   ), 
                   onPressed: () { 
                     Navigator.push(context, 

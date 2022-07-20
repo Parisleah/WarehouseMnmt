@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:warehouse_mnmt/Page/buying_page.dart';
 import 'package:warehouse_mnmt/Page/selling_nav_chooseCustomer.dart';
+import 'package:warehouse_mnmt/Page/selling_nav_chooseShipping.dart';
 
 // Page
 import 'package:warehouse_mnmt/Page/selling_page.dart';
 import 'package:warehouse_mnmt/Page/selling_nav_pickProd.dart';
-import 'package:warehouse_mnmt/Page/selling_nav_chooseShipping.dart';
-import 'package:warehouse_mnmt/Page/pickProduct/pickProduct_page.dart';
+import 'package:warehouse_mnmt/Page/buying/buying_nav_chooseDealer.dart';
 
 // Component
 import 'package:warehouse_mnmt/components/datePicker_component.dart';
@@ -17,45 +18,28 @@ import 'package:warehouse_mnmt/components/styleButton.dart';
 
 // Model
 import 'package:warehouse_mnmt/Models/products.dart';
-import 'package:warehouse_mnmt/Models/customers.dart';
 
 // Class for TextField Decimal Format (ex. 1,000,200.00 $)
 import 'package:warehouse_mnmt/components/textField_component.dart';
 
-class sellingNavEdit extends StatefulWidget {
+class buyingNavAdd extends StatefulWidget {
   // Navigation ---------------------------------------------------
 
   // Navigation ---------------------------------------------------
-
-  // customer ---------------------------------------------------------
-  final Customer customer;
-
-  sellingNavEdit({
-    Key? key,
-    required this.customer,
-  }) : super(key: key);
-  // customer ---------------------------------------------------------
 
   @override
-  State<sellingNavEdit> createState() => _sellingNavEditState();
+  State<buyingNavAdd> createState() => _buyingNavAddState();
 }
 
-class _sellingNavEditState extends State<sellingNavEdit> {
+class _buyingNavAddState extends State<buyingNavAdd> {
   List<Prod> products = [
     const Prod(
         prodName: "Scream Black Coat1",
         prodCategory: "Jacket",
         prodDetail: "Leather 100%",
-        prodImage: "assets/images/products/1.png",
+        prodImage: "assets/images/products/4.png",
         prodPrice: 590.50,
-        prodAmount: 2),
-    const Prod(
-        prodName: "Scream Black Coat2",
-        prodCategory: "Jacket",
-        prodDetail: "Leather 100%",
-        prodImage: "assets/images/products/2.png",
-        prodPrice: 590.50,
-        prodAmount: 2),
+        prodAmount: 10),
   ];
   // TextField shippingPrice
   final CurrencyTextInputFormatter formatter = CurrencyTextInputFormatter();
@@ -63,8 +47,7 @@ class _sellingNavEditState extends State<sellingNavEdit> {
   // Edit Detail Zone
   final shippingPrice = 50.99;
   final totalPrice = 1180.99;
-  final withoutTaxPrice = 1098.3207;
-  final tax = 82.6693;
+  final amount = 3;
 
   // TextField -------------------------------------------------------------
   // ShipPrice TextField
@@ -86,20 +69,22 @@ class _sellingNavEditState extends State<sellingNavEdit> {
     shipPricController.addListener(() => setState(() {}));
   }
 
+  bool _value = false;
+
 // Edit Detail Zone
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(120),
+        preferredSize: Size.fromHeight(70),
         child: AppBar(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
           title: Column(
             children: [
               Text(
-                "แก้ไขรายการขาย",
+                "เพิ่มการสั่งซื้อ",
                 style: TextStyle(fontSize: 25),
               )
             ],
@@ -111,27 +96,6 @@ class _sellingNavEditState extends State<sellingNavEdit> {
               icon: Icon(Icons.delete),
             )
           ],
-          flexibleSpace: Center(
-              child: Baseline(
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              CircleAvatar(
-                radius: 20,
-                backgroundImage: AssetImage(widget.customer.urlAvatar),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Text(
-                  widget.customer.username,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-              )
-            ]),
-            baselineType: TextBaseline.alphabetic,
-            baseline: 90,
-          )),
           backgroundColor: Color.fromRGBO(30, 30, 65, 1.0),
         ),
       ),
@@ -157,7 +121,7 @@ class _sellingNavEditState extends State<sellingNavEdit> {
             padding: const EdgeInsets.all(10.0),
             child: Column(children: [
               const SizedBox(
-                height: 150,
+                height: 90,
               ),
               // Date Picker
               Container(
@@ -165,6 +129,43 @@ class _sellingNavEditState extends State<sellingNavEdit> {
                 height: 70,
                 child: datePicker(),
               ),
+              Row(
+                children: [
+                  Text(
+                    "ตัวแทนจำหน่าย",
+                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              // Container of เลือกลูกค้า
+              Container(
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(56, 48, 77, 1.0),
+                    borderRadius: BorderRadius.circular(15)),
+                width: 400,
+                height: 70,
+                child: Row(children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: const Text("ยังไม่ได้ระบุตัวแทนจำหน่าย",
+                        style: TextStyle(fontSize: 15, color: Colors.grey)),
+                  ),
+                  Spacer(),
+                  IconButton(
+                    icon: Icon(Icons.arrow_forward_ios, color: Colors.white),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) => buying_nav_chooseDealer()));
+                    },
+                  ),
+                ]),
+              ),
+              // Container of เลือกลูกค้า
               const SizedBox(
                 height: 10,
               ),
@@ -172,7 +173,7 @@ class _sellingNavEditState extends State<sellingNavEdit> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "รายการสินค้า",
+                    "รายการสั่งซื้อ",
                     style: TextStyle(fontSize: 25, color: Colors.white),
                   ),
                 ],
@@ -193,12 +194,7 @@ class _sellingNavEditState extends State<sellingNavEdit> {
                   child: Column(children: [
                     ElevatedButton(
                       style: prodPickButtonStyle,
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                                builder: (context) => pickProd_page()));
-                      },
+                      onPressed: () {},
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -310,6 +306,15 @@ class _sellingNavEditState extends State<sellingNavEdit> {
                   ]),
                 ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "การจัดส่ง",
+                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  ),
+                ],
+              ),
               // Container of รายการสินค้า
               const SizedBox(
                 height: 10,
@@ -385,10 +390,25 @@ class _sellingNavEditState extends State<sellingNavEdit> {
                     )),
               ),
               // Container of ค่าจัดส่ง
+
               const SizedBox(
                 height: 10,
               ),
-              // Container of ภาษี 7 %
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "สรุปรายการสั่งซื้อ",
+                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+
+              // Container of จำนวน
               Container(
                 decoration: BoxDecoration(
                     color: const Color.fromRGBO(56, 48, 77, 1.0),
@@ -398,25 +418,25 @@ class _sellingNavEditState extends State<sellingNavEdit> {
                 child: Row(children: [
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: const Text("Vat (7%)",
+                    child: const Text("จำนวน",
                         style: TextStyle(fontSize: 15, color: Colors.white)),
                   ),
                   Spacer(),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Text(
-                        '${NumberFormat("#,###,###,###.##").format(tax)}',
+                        '${NumberFormat("#,###,###,### ชิ้น").format(amount)}',
                         textAlign: TextAlign.left,
                         style:
                             const TextStyle(fontSize: 15, color: Colors.grey)),
                   ),
                 ]),
               ),
-              // Container of ภาษี 7 %
+              // Container of จำนวน
               const SizedBox(
                 height: 10,
               ),
-              // Container of ราคาสุทธิ
+              // Container of รวม
               Container(
                 decoration: BoxDecoration(
                     color: const Color.fromRGBO(56, 48, 77, 1.0),
@@ -426,35 +446,7 @@ class _sellingNavEditState extends State<sellingNavEdit> {
                 child: Row(children: [
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: const Text("ราคาสุทธิ",
-                        style: TextStyle(fontSize: 15, color: Colors.white)),
-                  ),
-                  Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(
-                        '${NumberFormat("#,###,###,###.##").format(withoutTaxPrice)}',
-                        textAlign: TextAlign.left,
-                        style:
-                            const TextStyle(fontSize: 15, color: Colors.grey)),
-                  ),
-                ]),
-              ),
-              // Container of ราคาสุทธิ
-              const SizedBox(
-                height: 10,
-              ),
-              // Container of ราคาขายรวม
-              Container(
-                decoration: BoxDecoration(
-                    color: const Color.fromRGBO(56, 48, 77, 1.0),
-                    borderRadius: BorderRadius.circular(15)),
-                width: 400,
-                height: 70,
-                child: Row(children: [
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: const Text("ราคาขายรวม",
+                    child: const Text("รวม",
                         style: TextStyle(fontSize: 15, color: Colors.white)),
                   ),
                   Spacer(),
@@ -468,88 +460,59 @@ class _sellingNavEditState extends State<sellingNavEdit> {
                   ),
                 ]),
               ),
-              // Container of ราคาขายรวม
-              Row(
-                children: [
-                  Text(
-                    "ลูกค้า",
-                    style: TextStyle(fontSize: 25, color: Colors.white),
-                  ),
-                ],
-              ),
+              // Container of รวม
               const SizedBox(
                 height: 10,
               ),
-              // Container of เลือกลูกค้า
-              Container(
-                decoration: BoxDecoration(
-                    color: Color.fromRGBO(56, 48, 77, 1.0),
-                    borderRadius: BorderRadius.circular(15)),
-                width: 400,
-                height: 70,
-                child: Row(children: [
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: const Text("ยังไม่ได้ระบุลูกค้า",
-                        style: TextStyle(fontSize: 15, color: Colors.grey)),
-                  ),
-                  Spacer(),
-                  IconButton(
-                    icon: Icon(Icons.arrow_forward_ios, color: Colors.white),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          new MaterialPageRoute(
-                              builder: (context) =>
-                                  selling_nav_chooseCustomer()));
-                    },
-                  ),
-                ]),
-              ),
-              // Container of เลือกลูกค้า
+
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "คำร้องขอพิเศษ",
-                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  Center(
+                      child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        _value = !_value;
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.transparent),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: _value
+                            ? Icon(
+                                Icons.check_box,
+                                size: 40.0,
+                                color: Colors.greenAccent,
+                              )
+                            : Icon(
+                                Icons.check_box_outline_blank,
+                                size: 40.0,
+                                color: Colors.greenAccent,
+                              ),
+                      ),
+                    ),
+                  )),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "ได้รับสินค้าเรียบร้อยแล้ว",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        "(สินค้าคงเหลือจะได้รับการปรับปรุง)",
+                        style: TextStyle(fontSize: 15, color: Colors.white),
+                      ),
+                    ],
                   ),
                 ],
               ),
-              // Container of คำร้องขอพิเศษ
-              Container(
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                    color: const Color.fromRGBO(56, 48, 77, 1.0),
-                    borderRadius: BorderRadius.circular(15)),
-                width: 400,
-                height: 70,
-                child: TextField(
-                    style: const TextStyle(color: Colors.white),
-                    controller: specReqController,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: const Color.fromRGBO(56, 48, 77, 1.0),
-                      border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          borderSide: BorderSide.none),
-                      hintText: "เช่น ฝากวางหน้าบ้าน ตรงโต๊ะไม้หินอ่อน",
-                      hintStyle:
-                          const TextStyle(color: Colors.grey, fontSize: 14),
-                      prefixIcon: const Icon(Icons.edit, color: Colors.white),
-                      suffixIcon: specReqController.text.isEmpty
-                          ? Container(
-                              width: 0,
-                            )
-                          : IconButton(
-                              onPressed: () => specReqController.clear(),
-                              icon: const Icon(
-                                Icons.close_sharp,
-                                color: Colors.white,
-                              ),
-                            ),
-                    )),
-              ),
-              // Container of คำร้องขอพิเศษ
 
               Padding(
                 padding: const EdgeInsets.all(15.0),

@@ -2,55 +2,59 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 // Navigator Page
+/// Edit Page
 import 'package:warehouse_mnmt/Page/selling_nav_edit.dart';
+// Add Page
+import 'package:warehouse_mnmt/Page/selling_nav_add.dart';
 
 // Component
 import 'package:warehouse_mnmt/components/searchBar_component.dart';
 
-class User {
-  final String username;
-  final String email;
-  final String urlAvatar;
-  final double cost;
-  final String sellingDate;
-
-  const User({
-    required this.username,
-    required this.email,
-    required this.urlAvatar,
-    required this.cost,
-    required this.sellingDate,
-  });
-}
+// Models
+import 'package:warehouse_mnmt/Models/customers.dart';
 
 class SellingPage extends StatelessWidget {
-  List<User> users = [
-    const User(
-        username: "Thejassvee",
-        email: "Thejacvee.jagg@bumail.net",
-        urlAvatar:
-            "https://yt3.ggpht.com/vWyy-S6mrH0522dupmgkOq-HRHEwjm-q_qt6UUlvhp11_iTTQoITKuC4jGN05e_kwl2OTOmA=s900-c-k-c0x00ffffff-no-rj",
+  List<Customer> customers = [
+    const Customer(
+        username: "Thejasvee",
+        email: "Thejasvee.jagg@bumail.net",
+        urlAvatar: "assets/images/profiles/Tj.png",
         cost: 699.12165,
         sellingDate: "14 เม.ย. 2022"),
-    const User(
+    const Customer(
         username: "Pisit Janthawee",
         email: "Pisit.jant@bumail.net",
-        urlAvatar:
-            "https://scontent.fbkk4-2.fna.fbcdn.net/v/t1.6435-9/88154019_2612602255641052_5203521606894223360_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeE9dxwmZnj8JUAqhjDVruBknB-2SijWS-acH7ZKKNZL5i57DIONDmiNODrQmDiTWVpYf4WB5-CLltd_mEYgW6dK&_nc_ohc=opqwwDRXHu8AX-Mj1Sd&_nc_ht=scontent.fbkk4-2.fna&oh=00_AT-zPjcQkfDS5L7twXD-nFsC7yLYaMJr7GgSCQsvpQBAZQ&oe=62DC6820",
+        urlAvatar: "assets/images/profiles/Aum.png",
         cost: 890.12165,
         sellingDate: "14 เม.ย. 2022"),
-    const User(
+    const Customer(
         username: "Nattapat Kongpanya",
         email: "Nattapat.Kong@bumail.net",
-        urlAvatar:
-            "https://instagram.fbkk3-1.fna.fbcdn.net/v/t51.2885-15/274911629_146513871151813_3524025211260475370_n.jpg?stp=dst-jpg_e35&_nc_ht=instagram.fbkk3-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=PUC6ft8oRLAAX89Hr_L&tn=Q4_hpCT4vYxXKS2x&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=Mjc4Mjg4OTU0NDcwMjYwMzM3MQ%3D%3D.2-ccb7-5&oh=00_AT-VhDExLFAdmPYBit6hbVu4plX5Jlz7zWXMdBJnTCrCSw&oe=62BD2ACA&_nc_sid=30a2ef",
+        urlAvatar: "assets/images/profiles/Mark.png",
         cost: 1890.12165,
         sellingDate: "14 เม.ย. 2022"),
-    const User(
+    const Customer(
         username: "Phongsiri Chaisrida",
         email: "Dong.chai@bumail.net",
-        urlAvatar:
-            "https://scontent.fbkk4-2.fna.fbcdn.net/v/t39.30808-6/273028212_1969379269911513_6834572220376279937_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeHxl1N8E14wAiy5XO6UYoEczWlc8PPPKz7NaVzw888rPjU3AGnu87os-iFMfEyPQzfGtoNLya0WWBf6GOeA1vFw&_nc_ohc=6ywswFDO1_0AX80Maod&_nc_zt=23&_nc_ht=scontent.fbkk4-2.fna&oh=00_AT9rbI29_KmTVxvqsAPJl-kAtfnib5a-qlRKVzHLf2uiKg&oe=62BB4700",
+        urlAvatar: "assets/images/profiles/Dong.png",
+        cost: 990.12165,
+        sellingDate: "14 เม.ย. 2022"),
+    const Customer(
+        username: "Phongsiri Chaisrida",
+        email: "Dong.chai@bumail.net",
+        urlAvatar: "assets/images/profiles/Dong.png",
+        cost: 990.12165,
+        sellingDate: "14 เม.ย. 2022"),
+    const Customer(
+        username: "Phongsiri Chaisrida",
+        email: "Dong.chai@bumail.net",
+        urlAvatar: "assets/images/profiles/Dong.png",
+        cost: 990.12165,
+        sellingDate: "14 เม.ย. 2022"),
+    const Customer(
+        username: "Phongsiri Chaisrida",
+        email: "Dong.chai@bumail.net",
+        urlAvatar: "assets/images/profiles/Dong.png",
         cost: 990.12165,
         sellingDate: "14 เม.ย. 2022"),
   ];
@@ -63,16 +67,25 @@ class SellingPage extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(160),
           child: AppBar(
+            shadowColor: Colors.black.withOpacity(1.0),
+            shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.vertical(bottom: Radius.circular(30))),
             title: const Text(
               " ขายสินค้า",
               style: TextStyle(fontSize: 25),
             ),
 
-            backgroundColor: Colors.transparent,
+            backgroundColor: Color.fromRGBO(30, 30, 65, 1.0),
             // leading: IconButton(icon: Icon(Icons.menu), onPressed: () {}),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => sellingNavAdd()));
+                },
                 icon: Icon(Icons.add),
               )
             ],
@@ -176,9 +189,9 @@ class SellingPage extends StatelessWidget {
           alignment: Alignment.center,
           padding: const EdgeInsets.all(10),
           child: ListView.builder(
-              itemCount: users.length,
+              itemCount: customers.length,
               itemBuilder: (context, index) {
-                final user = users[index];
+                final customer = customers[index];
                 return Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
@@ -188,13 +201,15 @@ class SellingPage extends StatelessWidget {
                   child: ListTile(
                     leading: CircleAvatar(
                       radius: 30,
+
                       // backgroundImage: NetworkImage(user.urlAvatar),
-                      backgroundImage: AssetImage('assets/images/ga.png'),
+
+                      backgroundImage: AssetImage(customer.urlAvatar),
                     ),
 
                     // leading: Container(
-                    //   width: 70.0,
-                    //   height: 70.0,
+                    //   width: 50.0,
+                    //   height: 90.0,
                     //   decoration: BoxDecoration(
                     //     borderRadius: BorderRadius.circular(10),
                     //     image: const DecorationImage(
@@ -203,8 +218,9 @@ class SellingPage extends StatelessWidget {
                     //     ),
                     //   ),
                     // ),
+
                     title: Text(
-                      user.username,
+                      customer.username,
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white),
                     ),
@@ -212,24 +228,25 @@ class SellingPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 80),
                         child: Text(
-                          user.email,
+                          customer.email,
                           style: TextStyle(fontSize: 15, color: Colors.white),
                         ),
                       ),
                       Text(
-                        user.sellingDate,
+                        customer.sellingDate,
                         style: TextStyle(color: Colors.grey),
                       )
                     ]),
                     trailing: Text(
-                      '${NumberFormat("#,###.##").format(user.cost)} ฿',
+                      '${NumberFormat("#,###.##").format(customer.cost)} ฿',
                       style: TextStyle(
                           color: Colors.greenAccent,
                           fontWeight: FontWeight.bold),
                     ),
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => sellingNavEdit(user: user)));
+                          builder: (context) =>
+                              sellingNavEdit(customer: customer)));
                     },
                   ),
                 );

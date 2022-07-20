@@ -67,6 +67,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'เบอร์โทรศัพท์มือถือ',
+                        hintStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255))
                       ),
                     ),
                   ),
@@ -87,7 +88,10 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                     )
                   ),
                   child: Text('ยืนยัน',
-                    style: TextStyle(fontSize: 20)
+                    style: TextStyle(
+                    color: Color.fromRGBO(31, 26, 48, 1),
+                    fontSize: 20
+                    ),
                     ), 
                     onPressed: () { 
                       Navigator.push(context, 

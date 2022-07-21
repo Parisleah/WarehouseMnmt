@@ -1,449 +1,327 @@
-// Others
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:intl/intl.dart';
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 
-// Page
-import 'package:warehouse_mnmt/Page/selling_page.dart';
+// Components
+import 'package:warehouse_mnmt/components/searchBar_component.dart';
+import 'package:warehouse_mnmt/Page/selling_nav_showProd.dart';
 
 // Model
 import 'package:warehouse_mnmt/Models/products.dart';
 
-// Component
-import 'package:warehouse_mnmt/components/styleButton.dart';
-
-// Class for TextField Decimal Format (ex. 1,000,200.00 $)
-import 'package:warehouse_mnmt/components/textField_component.dart';
-
-class sellingNavPickProd extends StatefulWidget {
-  final Prod product;
-
-  sellingNavPickProd({
-    Key? key,
-    required this.product,
-  }) : super(key: key);
+class selling_nav_pickProd extends StatefulWidget {
+  const selling_nav_pickProd({Key? key}) : super(key: key);
 
   @override
-  State<sellingNavPickProd> createState() => _sellingNavPickProdState();
+  State<selling_nav_pickProd> createState() => _selling_nav_pickProdState();
 }
 
-class _sellingNavPickProdState extends State<sellingNavPickProd> {
-  final prodType = ["type1", "type2", "type3", "type4", "type5"];
-  final prodSlot = ["slot1", "slot2", "slot3", "slot4", "slot5"];
+class _selling_nav_pickProdState extends State<selling_nav_pickProd> {
+  //  Visible -----------
+  // ตะกร้า
+  bool inCartIsVisible = false;
 
-  String? value;
-  // TextField -------------------------------------------------------------
-  // prodAmountController TextField
-  final prodAmountController = TextEditingController();
-  final prodRequestController = TextEditingController();
-  // Text Field
-  void initState() {
-    super.initState();
+  // สินค้าหมด
+  bool outOfStockIsVisible = false;
+  //  Visible -----------
 
-    prodAmountController.addListener(() => setState(() {}));
-    prodRequestController.addListener(() => setState(() {}));
-  }
-  // TextField -------------------------------------------------------------
+  List<Prod> products = [
+    const Prod(
+        prodName: "Scream Black Coat2",
+        prodCategory: "Jacket",
+        prodDetail: "Leather 100%",
+        prodImage: "assets/images/products/1.png",
+        prodPrice: 590.50,
+        prodAmount: 10),
+    const Prod(
+        prodName: "Scream Black Coat1",
+        prodCategory: "Jacket",
+        prodDetail: "Leather 100%",
+        prodImage: "assets/images/products/2.png",
+        prodPrice: 590.50,
+        prodAmount: 12),
+    const Prod(
+        prodName: "Scream Black Coat2",
+        prodCategory: "Jacket",
+        prodDetail: "Leather 100%",
+        prodImage: "assets/images/products/3.png",
+        prodPrice: 590.50,
+        prodAmount: 20),
+    const Prod(
+        prodName: "Scream Black Coat2",
+        prodCategory: "Jacket",
+        prodDetail: "Leather 100%",
+        prodImage: "assets/images/products/4.png",
+        prodPrice: 590.50,
+        prodAmount: 15),
+    const Prod(
+        prodName: "Scream Black Coat2",
+        prodCategory: "Jacket",
+        prodDetail: "Leather 100%",
+        prodImage: "assets/images/products/5.png",
+        prodPrice: 590.50,
+        prodAmount: 8),
+    const Prod(
+        prodName: "Scream Black Coat2",
+        prodCategory: "Jacket",
+        prodDetail: "Leather 100%",
+        prodImage: "assets/images/products/6.png",
+        prodPrice: 590.50,
+        prodAmount: 10),
+    const Prod(
+        prodName: "Scream Black Coat2",
+        prodCategory: "Jacket",
+        prodDetail: "Leather 100%",
+        prodImage: "assets/images/products/7.png",
+        prodPrice: 590.50,
+        prodAmount: 2),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
+        preferredSize: Size.fromHeight(120),
         child: AppBar(
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
           title: Column(
             children: [
               Text(
-                widget.product.prodName,
+                "เลือกสินค้า",
                 style: TextStyle(fontSize: 25),
               )
             ],
           ),
           centerTitle: true,
-          actions: [
-            // ?
-          ],
+          actions: [],
+          flexibleSpace: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Baseline(
+              child: searchBar_component("ชื่อสินค้า"),
+              baselineType: TextBaseline.alphabetic,
+              baseline: 90,
+            ),
+          ),
           backgroundColor: Color.fromRGBO(30, 30, 65, 1.0),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(10),
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-              colors: [
-                Color.fromRGBO(29, 29, 65, 1.0),
-                Color.fromRGBO(31, 31, 31, 1.0),
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            )),
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  height: 90,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image(
-                      height: 150,
-                      image: AssetImage(widget.product.prodImage),
-                    ),
-                  ),
-                ),
-                Column(children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Container(
-                      color: Color.fromARGB(255, 33, 36, 34),
+      body: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(10),
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+          colors: [
+            Color.fromRGBO(29, 29, 65, 1.0),
+            Color.fromRGBO(31, 31, 31, 1.0),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        )),
+        child: Column(children: [
+          SizedBox(height: 140),
+          // ListView
+          Padding(
+            padding: const EdgeInsets.only(top: 5),
+            child: Container(
+              height: 518.0,
+              width: 440.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+                color: Colors.transparent,
+              ),
+              child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  itemCount: products.length,
+                  itemBuilder: (context, index) {
+                    final product = products[index];
+                    return TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                sellingNavShowProd(product: product)));
+                      },
                       child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          widget.product.prodCategory,
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    widget.product.prodDetail,
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.grey),
-                  ),
-                  Text(
-                    "คงเหลือสินค้าทั้งหมด ${NumberFormat("#,###").format(widget.product.prodAmount)} ชิ้น",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.grey),
-                  ),
-                ]),
-                // Drop Down แบบสินค้า
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    width: 350,
-                    height: 60,
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton2<String>(
-                        hint: Text(
-                          "เลือกแบบสินค้า",
-                          style: TextStyle(fontSize: 15, color: Colors.white),
-                        ),
-                        value: value,
-                        isExpanded: true,
-                        iconSize: 30,
-                        buttonPadding:
-                            const EdgeInsets.only(left: 14, right: 14),
-                        buttonDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14),
-                          border: Border.all(
-                            color: Colors.transparent,
-                          ),
-                          color: Color.fromRGBO(56, 54, 76, 1.0),
-                        ),
-                        buttonElevation: 2,
-                        itemHeight: 72,
-                        itemPadding: const EdgeInsets.only(left: 8, right: 8),
-                        dropdownMaxHeight: 350,
-                        dropdownWidth: 350,
-                        dropdownPadding: null,
-                        dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14),
-                          color: Color.fromRGBO(66, 64, 87, 1.0),
-                        ),
-                        dropdownElevation: 8,
-                        scrollbarRadius: const Radius.circular(40),
-                        scrollbarThickness: 6,
-                        scrollbarAlwaysShow: true,
-                        icon: const Icon(
-                          Icons.keyboard_arrow_down,
-                          color: Colors.white,
-                        ),
-                        items: prodType.map(buildMenuItemType).toList(),
-                        onChanged: (value) =>
-                            setState(() => this.value = value),
-                      ),
-                    ),
-                  ),
-                ),
-                // Drop Down ล็อตสินค้า
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    width: 350,
-                    height: 60,
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton2<String>(
-                        hint: const Text(
-                          "เลือกล็อตสินค้า",
-                          style: TextStyle(fontSize: 15, color: Colors.white),
-                        ),
-                        value: value,
-                        isExpanded: true,
-                        iconSize: 30,
-                        buttonPadding:
-                            const EdgeInsets.only(left: 14, right: 14),
-                        buttonDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14),
-                          border: Border.all(
-                            color: Colors.transparent,
-                          ),
-                          color: Color.fromRGBO(56, 54, 76, 1.0),
-                        ),
-                        buttonElevation: 2,
-                        itemHeight: 72,
-                        itemPadding: const EdgeInsets.only(left: 8, right: 8),
-                        dropdownMaxHeight: 350,
-                        dropdownWidth: 350,
-                        dropdownPadding: null,
-                        dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14),
-                          color: Color.fromRGBO(66, 64, 87, 1.0),
-                        ),
-                        dropdownElevation: 8,
-                        scrollbarRadius: const Radius.circular(40),
-                        scrollbarThickness: 6,
-                        scrollbarAlwaysShow: true,
-                        icon: Icon(
-                          Icons.keyboard_arrow_down,
-                          color: Colors.white,
-                        ),
-                        items: prodSlot.map(buildMenuItemSlot).toList(),
-                        onChanged: (value) =>
-                            setState(() => this.value = value),
-                      ),
-                    ),
-                  ),
-                ),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 0.0, horizontal: 0.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            height: 80,
+                            width: 400,
+                            color: Color.fromRGBO(56, 54, 76, 1.0),
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                    width: 80,
+                                    height: 80,
+                                    decoration: new BoxDecoration(
+                                        image: new DecorationImage(
+                                      image: new AssetImage(product.prodImage),
+                                      fit: BoxFit.fill,
+                                    ))),
+                                SizedBox(width: 10),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Row(
+                                        children: [
+                                          Text(
+                                            product.prodName,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          CircleAvatar(
+                                            radius: 10,
+                                            backgroundColor:
+                                                Color.fromRGBO(30, 30, 49, 1.0),
+                                            child: Text(
+                                                '${NumberFormat("#,###.##").format(product.prodAmount)}',
+                                                style: const TextStyle(
+                                                    fontSize: 12,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        product.prodCategory,
+                                        style: const TextStyle(
+                                            fontSize: 12, color: Colors.white),
+                                      ),
+                                      Text(
+                                          'ราคา/หน่วย ${NumberFormat("#,###.##").format(product.prodPrice)}',
+                                          style: const TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 12)),
+                                      Text(
+                                          'ราคา ${NumberFormat("#,###.##").format(product.prodPrice)}',
+                                          style: const TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 12)),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Container(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        if (inCartIsVisible)
+                                          // ตะกร้า 1 -------------------------
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(13),
+                                            child: Container(
+                                              height: 15,
+                                              width: 22,
+                                              color: Colors.redAccent,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(0.0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: const [
+                                                    Icon(
+                                                      Icons
+                                                          .shopping_cart_rounded,
+                                                      size: 10,
+                                                      color: Colors.white,
+                                                    ),
+                                                    Text(
+                                                      "1",
+                                                      style: TextStyle(
+                                                        fontSize: 10,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        // ตะกร้า 1 -------------------------
+                                        if (outOfStockIsVisible)
 
-                //Container of จำนวนสินค้า
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        "จำนวนสินค้า",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          color: const Color.fromRGBO(56, 48, 77, 1.0),
-                          borderRadius: BorderRadius.circular(15)),
-                      width: 350,
-                      height: 60,
-                      child: TextField(
-                          textAlign: TextAlign.start,
-                          inputFormatters: [DecimalFormatter()],
-                          keyboardType: TextInputType.number,
-                          //-----------------------------------------------------
-                          style: const TextStyle(color: Colors.grey),
-                          controller: prodAmountController,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.transparent,
-                            border: const OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                borderSide: BorderSide.none),
-                            hintText: "1",
-                            hintStyle: const TextStyle(
-                                color: Colors.grey, fontSize: 14),
-                            suffixIcon: !prodAmountController.text.isEmpty
-                                ? IconButton(
-                                    onPressed: () =>
-                                        prodAmountController.clear(),
-                                    icon: const Icon(
-                                      Icons.close_sharp,
-                                      color: Colors.white,
+                                          // + เพิ่มสินค้า  -------------------------
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(13),
+                                            child: Container(
+                                              height: 30,
+                                              width: 65,
+                                              color: Colors.greenAccent,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                child: Center(
+                                                  child: const Text(
+                                                    "+ เพิ่มสินค้า",
+                                                    style: TextStyle(
+                                                      fontSize: 11,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        // + เพิ่มสินค้า  -------------------------
+
+                                        // สินค้าหมด Tag -------------------------------------
+                                        // ClipRRect(
+                                        //   borderRadius:
+                                        //       BorderRadius.circular(5),
+                                        //   child: Container(
+                                        //     height: 15,
+                                        //     width: 50,
+                                        //     color: Colors.redAccent,
+                                        //     child: Center(
+                                        //       child: const Text(
+                                        //         "สินค้าหมด",
+                                        //         style: TextStyle(
+                                        //             fontSize: 10,
+                                        //             color: Colors.white),
+                                        //       ),
+                                        //     ),
+                                        //   ),
+                                        // )
+                                        // สินค้าหมด Tag -------------------------------------
+                                      ],
                                     ),
-                                  )
-                                : null,
-                          )),
-                    ),
-                  ],
-                ),
-                // Container of จำนวนสินค้า
-                // Container of คำขอร้องพิเศษ
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        "คำขอร้องพิเศษ",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          color: const Color.fromRGBO(56, 48, 77, 1.0),
-                          borderRadius: BorderRadius.circular(15)),
-                      width: 350,
-                      height: 60,
-                      child: TextField(
-                          textAlign: TextAlign.start,
-                          //-----------------------------------------------------
-                          style: const TextStyle(color: Colors.grey),
-                          controller: prodRequestController,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.transparent,
-                            border: const OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                borderSide: BorderSide.none),
-                            hintText: "สินค้าชิ้นนี้ต้องการแบบนี้...",
-                            hintStyle: const TextStyle(
-                                color: Colors.grey, fontSize: 14),
-                            suffixIcon: !prodRequestController.text.isEmpty
-                                ? IconButton(
-                                    onPressed: () =>
-                                        prodRequestController.clear(),
-                                    icon: const Icon(
-                                      Icons.close_sharp,
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                : null,
-                          )),
-                    ),
-                  ],
-                ),
-                // Container of คำขอร้องพิเศษ
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(children: [
-                        TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              "ยกเลิก",
-                              style: TextStyle(fontSize: 17),
+                                  ),
+                                ),
+                              ],
                             ),
-                            style: cancelButtonStyle)
-                      ]),
-                      Column(children: [
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "บันทึก",
-                            style: TextStyle(fontSize: 17),
                           ),
-                          style: saveButtonStyle,
-                        )
-                      ]),
-                    ],
-                  ),
-                )
-              ],
-            )),
+                        ),
+                      ),
+                    );
+                  }),
+            ),
+          )
+          // ListView
+        ]),
       ),
     );
   }
-
-  // DropDown Product Types
-  DropdownMenuItem<String> buildMenuItemType(String item) => DropdownMenuItem(
-        value: item,
-        child: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Container(
-              height: 100,
-              width: 400,
-              color: Color.fromRGBO(56, 54, 76, 1.0),
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      item,
-                      style: TextStyle(fontSize: 15, color: Colors.white),
-                    ),
-                    Spacer(),
-                    CircleAvatar(
-                      backgroundColor: Color.fromRGBO(30, 30, 49, 1.0),
-                      radius: 15,
-                      child: Text('${NumberFormat("#,###.##").format(1)}',
-                          style: const TextStyle(
-                              fontSize: 15,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-  // DropDown Product Slots
-  // ???
-  DropdownMenuItem<String> buildMenuItemSlot(String item) => DropdownMenuItem(
-        value: item,
-        child: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Container(
-              height: 100,
-              width: 400,
-              color: Color.fromRGBO(56, 54, 76, 1.0),
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          item,
-                          style: TextStyle(fontSize: 15, color: Colors.white),
-                        ),
-                        Spacer(),
-                        CircleAvatar(
-                          backgroundColor: Color.fromRGBO(30, 30, 49, 1.0),
-                          radius: 15,
-                          child: Text('${NumberFormat("#,###.##").format(1)}',
-                              style: const TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "เมื่อวันที่ 14 มิ.ย. 2022",
-                      style: TextStyle(fontSize: 12, color: Colors.grey),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
 }

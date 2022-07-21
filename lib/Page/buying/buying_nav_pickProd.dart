@@ -5,19 +5,38 @@ import 'package:intl/intl.dart';
 
 // Components
 import 'package:warehouse_mnmt/components/searchBar_component.dart';
-import 'package:warehouse_mnmt/Page/selling_nav_pickProd.dart';
+import 'package:warehouse_mnmt/Page/selling_nav_showProd.dart';
 
 // Model
 import 'package:warehouse_mnmt/Models/products.dart';
 
-class pickProd_page extends StatefulWidget {
-  const pickProd_page({Key? key}) : super(key: key);
+class buying_nav_pickProd extends StatefulWidget {
+  // Variable
+  // bool showInCartIsVisible;
+
+  buying_nav_pickProd({
+    Key? key,
+    // required this.showInCartIsVisible,
+  }) : super(key: key);
 
   @override
-  State<pickProd_page> createState() => _pickProd_pageState();
+  State<buying_nav_pickProd> createState() => _buying_nav_pickProdState();
 }
 
-class _pickProd_pageState extends State<pickProd_page> {
+class _buying_nav_pickProdState extends State<buying_nav_pickProd> {
+  // Variable
+  // Show Widget ?
+  bool showInCartIsVisible = false;
+  bool showOutOfStockIsVisible = true;
+  // Show Widget ?
+
+  // Product Add in Cart
+  void _showInCartIcon() {
+    setState(() {
+      showInCartIsVisible = !showInCartIsVisible;
+    });
+  }
+
   List<Prod> products = [
     const Prod(
         prodName: "Scream Black Coat2",
@@ -114,6 +133,17 @@ class _pickProd_pageState extends State<pickProd_page> {
         )),
         child: Column(children: [
           SizedBox(height: 140),
+          TextButton(
+              onPressed: () {
+                setState(() {
+                  showInCartIsVisible = !showInCartIsVisible;
+                  showOutOfStockIsVisible = !showOutOfStockIsVisible;
+                });
+              },
+              child: Text(
+                "Test ",
+                style: TextStyle(fontSize: 20),
+              )),
           // ListView
           Padding(
             padding: const EdgeInsets.only(top: 5),
@@ -133,7 +163,7 @@ class _pickProd_pageState extends State<pickProd_page> {
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) =>
-                                sellingNavPickProd(product: product)));
+                                sellingNavShowProd(product: product)));
                       },
                       child: Padding(
                         padding: EdgeInsets.symmetric(
@@ -213,68 +243,74 @@ class _pickProd_pageState extends State<pickProd_page> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
                                       children: [
-                                        // ตะกร้า 1 -------------------------
-                                        // ClipRRect(
-                                        //   borderRadius:
-                                        //       BorderRadius.circular(13),
-                                        //   child: Container(
-                                        //     height: 15,
-                                        //     width: 22,
-                                        //     color: Colors.redAccent,
-                                        //     child: Padding(
-                                        //       padding:
-                                        //           const EdgeInsets.all(0.0),
-                                        //       child: Row(
-                                        //         mainAxisAlignment:
-                                        //             MainAxisAlignment.center,
-                                        //         children: const [
-                                        //           Icon(
-                                        //             Icons.shopping_cart_rounded,
-                                        //             size: 10,
-                                        //             color: Colors.white,
-                                        //           ),
-                                        //           Text(
-                                        //             "1",
-                                        //             style: TextStyle(
-                                        //               fontSize: 10,
-                                        //               color: Colors.white,
-                                        //               fontWeight:
-                                        //                   FontWeight.bold,
-                                        //             ),
-                                        //           ),
-                                        //         ],
-                                        //       ),
-                                        //     ),
-                                        //   ),
-                                        // ),
+                                        if (showInCartIsVisible)
+                                          // ตะกร้า 1 -------------------------
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(13),
+                                            child: Container(
+                                              height: 15,
+                                              width: 22,
+                                              color: Colors.redAccent,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(0.0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: const [
+                                                    Icon(
+                                                      Icons
+                                                          .shopping_cart_rounded,
+                                                      size: 10,
+                                                      color: Colors.white,
+                                                    ),
+                                                    Text(
+                                                      "1",
+                                                      style: TextStyle(
+                                                        fontSize: 10,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         // ตะกร้า 1 -------------------------
 
-                                        // + เพิ่มสินค้า  -------------------------
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(13),
-                                          child: Container(
-                                            height: 30,
-                                            width: 65,
-                                            color: Colors.greenAccent,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: Center(
-                                                child: const Text(
-                                                  "+ เพิ่มสินค้า",
-                                                  style: TextStyle(
-                                                    fontSize: 11,
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
+                                        if (showOutOfStockIsVisible)
+
+                                          // + เพิ่มสินค้า  -------------------------
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(13),
+                                            child: Container(
+                                              height: 30,
+                                              width: 65,
+                                              color: Colors.greenAccent,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                child: Center(
+                                                  child: const Text(
+                                                    "+ เพิ่มสินค้า",
+                                                    style: TextStyle(
+                                                      fontSize: 11,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        ),
                                         // + เพิ่มสินค้า  -------------------------
 
+                                        // if product's amount is out of Stock
                                         // สินค้าหมด Tag -------------------------------------
                                         // ClipRRect(
                                         //   borderRadius:

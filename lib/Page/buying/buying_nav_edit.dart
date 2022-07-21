@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:warehouse_mnmt/Page/buying/buying_nav_showProd.dart';
 import 'package:warehouse_mnmt/Page/buying_page.dart';
 import 'package:warehouse_mnmt/Page/selling_nav_chooseCustomer.dart';
 import 'package:warehouse_mnmt/Page/selling_nav_chooseShipping.dart';
@@ -10,11 +11,11 @@ import 'package:warehouse_mnmt/Page/selling_nav_chooseShipping.dart';
 // Page
 // Page / Selling
 import 'package:warehouse_mnmt/Page/selling_page.dart';
-import 'package:warehouse_mnmt/Page/selling_nav_pickProd.dart';
+import 'package:warehouse_mnmt/Page/selling_nav_showProd.dart';
 // Page / Buying
 import 'package:warehouse_mnmt/Page/buying/buying_nav_chooseDealer.dart';
-// Page / pickProduct
-import 'package:warehouse_mnmt/Page/pickProduct/pickProduct_page.dart';
+import 'package:warehouse_mnmt/Page/buying/buying_nav_pickProd.dart';
+import 'package:warehouse_mnmt/Page/buying/buying_nav_showProd.dart';
 
 // Component
 import 'package:warehouse_mnmt/components/datePicker_component.dart';
@@ -45,6 +46,14 @@ class buyingNavEdit extends StatefulWidget {
 }
 
 class _buyingNavEditState extends State<buyingNavEdit> {
+  // //  Visible -----------
+  // ตะกร้า
+  bool inCartIsVisible = false;
+
+  // สินค้าหมด
+  bool outOfStockIsVisible = false;
+  //  Visible -----------
+
   List<Prod> products = [
     const Prod(
         prodName: "Scream Black Coat1",
@@ -225,10 +234,8 @@ class _buyingNavEditState extends State<buyingNavEdit> {
                     ElevatedButton(
                       style: prodPickButtonStyle,
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                                builder: (context) => pickProd_page()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => buying_nav_pickProd()));
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -256,7 +263,7 @@ class _buyingNavEditState extends State<buyingNavEdit> {
                               return TextButton(
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => sellingNavPickProd(
+                                      builder: (context) => sellingNavShowProd(
                                           product: product)));
                                 },
                                 child: Padding(

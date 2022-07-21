@@ -9,7 +9,7 @@ import 'package:warehouse_mnmt/Page/selling_nav_chooseShipping.dart';
 
 // Page
 import 'package:warehouse_mnmt/Page/selling_page.dart';
-import 'package:warehouse_mnmt/Page/selling_nav_pickProd.dart';
+import 'package:warehouse_mnmt/Page/selling_nav_showProd.dart';
 import 'package:warehouse_mnmt/Page/buying/buying_nav_chooseDealer.dart';
 
 // Component
@@ -221,7 +221,7 @@ class _buyingNavAddState extends State<buyingNavAdd> {
                               return TextButton(
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => sellingNavPickProd(
+                                      builder: (context) => sellingNavShowProd(
                                           product: product)));
                                 },
                                 child: Padding(

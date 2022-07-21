@@ -79,7 +79,9 @@ class _selling_nav_chooseCustomerState
                 primary: Color.fromRGBO(56, 54, 76, 1.0),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15))),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
             child: Row(children: [
               Padding(
                 padding: const EdgeInsets.all(25.0),

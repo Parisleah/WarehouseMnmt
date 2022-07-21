@@ -4,12 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:warehouse_mnmt/Page/selling_nav_chooseCustomer.dart';
+import 'package:warehouse_mnmt/Page/selling_nav_pickProd.dart';
 
 // Page
 import 'package:warehouse_mnmt/Page/selling_page.dart';
-import 'package:warehouse_mnmt/Page/selling_nav_pickProd.dart';
+import 'package:warehouse_mnmt/Page/selling_nav_showProd.dart';
 import 'package:warehouse_mnmt/Page/selling_nav_chooseShipping.dart';
-import 'package:warehouse_mnmt/Page/pickProduct/pickProduct_page.dart';
+import 'package:warehouse_mnmt/Page/selling_nav_pickProd.dart';
 
 // Component
 import 'package:warehouse_mnmt/components/datePicker_component.dart';
@@ -197,7 +198,7 @@ class _sellingNavEditState extends State<sellingNavEdit> {
                         Navigator.push(
                             context,
                             new MaterialPageRoute(
-                                builder: (context) => pickProd_page()));
+                                builder: (context) => selling_nav_pickProd()));
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -225,7 +226,7 @@ class _sellingNavEditState extends State<sellingNavEdit> {
                               return TextButton(
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => sellingNavPickProd(
+                                      builder: (context) => sellingNavShowProd(
                                           product: product)));
                                 },
                                 child: Padding(
@@ -558,7 +559,9 @@ class _sellingNavEditState extends State<sellingNavEdit> {
                   children: [
                     Column(children: [
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
                           child: Text(
                             "ยกเลิก",
                             style: TextStyle(fontSize: 17),
@@ -567,7 +570,9 @@ class _sellingNavEditState extends State<sellingNavEdit> {
                     ]),
                     Column(children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
                         child: Text(
                           "บันทึก",
                           style: TextStyle(fontSize: 17),
